@@ -7,5 +7,5 @@ export interface CartModel {
     totalPrice: number;  
     userId: number;  
   }  
-  const watchs = ref<WatchModel[]>(JSON.parse(sessionStorage.getItem("watchs") || "[]"));
+  const watches = ref<WatchModel[]>(JSON.parse(sessionStorage.getItem("watches") || "[]"));
 
