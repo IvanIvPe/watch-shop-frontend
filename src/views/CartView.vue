@@ -35,7 +35,7 @@ async function placeOrder() {
 
   const response = await CartService.createCart(cartData);
   if (response) {
-    alert('Your order is on your way successfully!');
+    alert('Your order is on your way!');
     clearCart();
   } else {
     alert('Failed to order. Please try again.');
@@ -52,7 +52,7 @@ async function placeOrder() {
           <th>#</th>
           <th>Name</th>
           <th>Brand</th>
-          <th>Price</th>
+          <th>Price (€)</th>
           <th>Remove</th>
         </tr>
       </thead>
@@ -75,11 +75,11 @@ async function placeOrder() {
       </tbody>
     </table>
   </div>
-  <div v-else>Your cart is being loaded. Please wait!</div>
+  <div v-else>Your cart is empty!</div>
 
   <button class="btn btn-success" @click="placeOrder">
     <i class="fa-solid fa-cart-shopping"></i>
-    Order Now
+    Purchase
   </button>
   <button class="btn btn-danger" @click="clearCart">
     <i class="fa-solid fa-trash-can"></i>

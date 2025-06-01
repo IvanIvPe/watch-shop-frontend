@@ -8,9 +8,9 @@ const watches = ref<WatchModel[]>([]);
 async function loadWatches() {
   try {
     watches.value = await WatchService.getAllWatches();
-    console.log("✅ Učitani satovi:", watches.value); // 👈 Dodato ovde
+    console.log("Watches loaded:", watches.value);
   } catch (error) {
-    console.error('❌ Failed to load watches:', error);
+    console.error('Failed to load watches:', error);
   }
 }
 
@@ -24,7 +24,7 @@ async function addToCart(model: WatchModel) {
     watches = [...watches, model];
     sessionStorage.setItem("watches", JSON.stringify(watches));
   } catch (error) {
-    console.error('❌ Failed to add to cart:', error);
+    console.error('Failed to add to cart:', error);
   }
 }
 
@@ -40,7 +40,7 @@ async function addToCart(model: WatchModel) {
           <th scope="col">#</th>
           <th scope="col">Name</th>
           <th scope="col">Brand</th>
-          <th scope="col">Price</th>
+          <th scope="col">Price (€)</th>
           <th scope="col">Add To Cart</th>
         </tr>
       </thead>
@@ -54,7 +54,7 @@ async function addToCart(model: WatchModel) {
             <div class="btn-group">
               <button type="button" class="btn btn-sm btn-success" @click="() => addToCart(p)">
                 <i class="fa-solid fa-cart-plus"></i>
-                Buy Now
+                Add to Cart
               </button>
             </div>
           </td>

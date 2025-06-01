@@ -18,7 +18,7 @@ function logout() {
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
         <RouterLink class="navbar-brand" to="/">
-          <i class="fa-solid fa-shop"></i>
+          <i class="fa-solid fa-clock"></i>
           Online Watch Shop
         </RouterLink>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">

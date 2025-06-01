@@ -8,7 +8,7 @@ const user = ref<UserModel | null>(null);
 const isLoading = ref(true);
 
 
-const isEditing = ref<{ // ovde samo sta ukljucuje da definisem 
+const isEditing = ref<{
   username: boolean;
   email: boolean;
   phone: boolean;
@@ -90,80 +90,123 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="isLoading">Your data is being loaded. Please wait!</div>
-  <div v-else-if="user">
-    <h1 class="h3">User Information</h1>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Username</th>
-          <th scope="col">Password</th>
-          <th scope="col">Email</th>
-          <th scope="col">Phone</th>
-          <th scope="col">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">{{ user.userId }}</th>
-          <td>
-            <input
-              v-if="isEditing.username"
-              v-model="editedUser.username"
-              type="text"
-              placeholder="Enter username"
-            />
-            <span v-else>{{ user.username }}</span>
-            <button @click="toggleEdit('username')">
-              {{ isEditing.username ? 'Save' : 'Edit' }}
-            </button>
-          </td>
-          <td>
-            <input
-              v-if="isEditing.password"
-              v-model="editedUser.password"
-              type="password"
-              placeholder="Enter password"
-            />
-            <span v-else>{{ user.password }}</span>
-            <button @click="toggleEdit('password')">
-              {{ isEditing.password ? 'Save' : 'Edit' }}
-            </button>
-          </td>
-          <td>
-            <input
-              v-if="isEditing.email"
-              v-model="editedUser.email"
-              type="email"
-              placeholder="Enter email"
-            />
-            <span v-else>{{ user.email }}</span>
-            <button @click="toggleEdit('email')">
-              {{ isEditing.email ? 'Save' : 'Edit' }}
-            </button>
-          </td>
-          <td>
-            <input
-              v-if="isEditing.phone"
-              v-model="editedUser.phone"
-              type="text"
-              placeholder="Enter phone"
-            />
-            <span v-else>{{ user.phone }}</span>
-            <button @click="toggleEdit('phone')">
-              {{ isEditing.phone ? 'Save' : 'Edit' }}
-            </button>
-          </td>
-          <td>
-            <button v-if="isEditing.username || isEditing.password || isEditing.email || isEditing.phone"
-                    @click="saveChanges">
-              Save Changes
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="container mt-5">
+    <div v-if="isLoading" class="text-center text-light">Loading your data...</div>
+    <div v-else-if="user">
+      <h1 class="h3 text-center text-light mb-4">User Information</h1>
+      <table class="table table-dark table-hover rounded">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col" class="text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{{ user.userId }}</th>
+
+            <!-- Username -->
+            <td>
+              <div class="d-flex justify-content-start align-items-center">
+                <input
+                  v-if="isEditing.username"
+                  v-model="editedUser.username"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Enter username"
+                />
+                <span v-else>{{ user.username }}</span>
+                <button 
+                  class="btn btn-sm btn-outline-primary ms-2"
+                  v-if="!isEditing.username"
+                  @click="toggleEdit('username')"
+                >
+                  Edit
+                </button>
+              </div>
+            </td>
+
+            <!-- Password -->
+            <td>
+              <div class="d-flex justify-content-start align-items-center">
+                <input
+                  v-if="isEditing.password"
+                  v-model="editedUser.password"
+                  type="password"
+                  class="form-control form-control-sm"
+                  placeholder="Enter password"
+                />
+                <span v-else>••••••••••</span>
+                <button 
+                  class="btn btn-sm btn-outline-primary ms-2"
+                  v-if="!isEditing.password"
+                  @click="toggleEdit('password')"
+                >
+                  Edit
+                </button>
+              </div>
+            </td>
+
+            <!-- Email -->
+            <td>
+              <div class="d-flex justify-content-start align-items-center">
+                <input
+                  v-if="isEditing.email"
+                  v-model="editedUser.email"
+                  type="email"
+                  class="form-control form-control-sm"
+                  placeholder="Enter email"
+                />
+                <span v-else>{{ user.email }}</span>
+                <button 
+                  class="btn btn-sm btn-outline-primary ms-2"
+                  v-if="!isEditing.email"
+                  @click="toggleEdit('email')"
+                >
+                  Edit
+                </button>
+              </div>
+            </td>
+
+            <!-- Phone -->
+            <td>
+              <div class="d-flex justify-content-start align-items-center">
+                <input
+                  v-if="isEditing.phone"
+                  v-model="editedUser.phone"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Enter phone"
+                />
+                <span v-else>{{ user.phone }}</span>
+                <button 
+                  class="btn btn-sm btn-outline-primary ms-2"
+                  v-if="!isEditing.phone"
+                  @click="toggleEdit('phone')"
+                >
+                  Edit
+                </button>
+              </div>
+            </td>
+
+            <!-- Save Changes -->
+            <td class="text-center">
+              <button
+                v-if="isEditing.username || isEditing.password || isEditing.email || isEditing.phone"
+                @click="saveChanges"
+                class="btn btn-success btn-sm"
+              >
+                Save All
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div v-else class="text-center text-light">No user data available.</div>
   </div>
-  <div v-else>No user data available.</div>
 </template>
