@@ -1,1 +1,1 @@
-Watch Shop Front-end
+Watch Shop Frontend - Sistemi e-poslovanja
